@@ -12,7 +12,7 @@ import base64
 
 # Code below was generated using ChatGPT
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})#update to match frontend url
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 model_path = 'models/yolov8m.pt' #make sure to put model in model folder
