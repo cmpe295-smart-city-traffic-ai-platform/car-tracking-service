@@ -1,0 +1,34 @@
+# Ignore YOLO model file
+models/yolov8m.pt
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+
+# Ignore environment variables
+.env
+*.env
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore coverage reports
+coverage/
+*.cover
+*.coverage
+*.coveragerc
+.coverage.*
+
+# Ignore other common files
+*.swp
+.DS_Store

@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-model_path = 'models/yolov8m.pt'
+model_path = 'models/yolov8m.pt' #make sure to put model in model folder
 model = YOLO(model_path)  # Load YOLOv8 model
 # Model from https://huggingface.co/Ultralytics/YOLOv8/blob/main/yolov8n.pt
 
