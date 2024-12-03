@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: smart-city-traffic-car-recognition-ingress-controller
+  namespace: smart-city-traffic
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: 'true'
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+          - path: /api/v1/car(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: car-recognition
+                port:
+                  number: 5000

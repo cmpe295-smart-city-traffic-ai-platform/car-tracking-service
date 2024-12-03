@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-recognition
+  namespace: smart-city-traffic
+spec:
+  selector:
+    app: car-recognition-service
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

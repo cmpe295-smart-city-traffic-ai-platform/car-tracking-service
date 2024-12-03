@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-recognition-deployment
+  labels:
+    app: car-recognition-service
+  namespace: smart-city-traffic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-recognition-service
+  template:
+    metadata:
+      labels:
+        app: car-recognition-service
+    spec:
+      containers:
+        - name: car-recognition-service
+          # image pushed to ECR in AWS
+          image: 319282596033.dkr.ecr.us-east-1.amazonaws.com/smart_city_traffic/car-recognition-service:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
