@@ -1,0 +1,11 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome
+    platform: linux/amd64
+    ports:
+      - 4444:4444
+  car-recognition:
+    depends_on: [selenium]
+    image: car-recognition-service:1.0.0
+    ports:
+      - 5000:5000

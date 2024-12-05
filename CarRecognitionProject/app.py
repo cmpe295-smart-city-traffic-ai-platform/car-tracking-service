@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 import cv2
 import numpy as np
@@ -12,14 +13,14 @@ import base64
 
 # Code below was generated using ChatGPT
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})#update to match frontend url
+CORS(app, resources={r"/*": {"origins": "*"}})#update to match frontend url
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 model_path = 'models/yolov8m.pt' #make sure to put model in model folder
 model = YOLO(model_path)  # Load YOLOv8 model
 # Model from https://huggingface.co/Ultralytics/YOLOv8/blob/main/yolov8n.pt
 
-chrome_options = Options()
+chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
@@ -54,7 +55,8 @@ def start_counting():
         stop_event.clear()  # Clear the stop event before starting a new thread
 
         def generate_frames():
-            driver = webdriver.Chrome(options=chrome_options)
+            # driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Remote("http://selenium:4444/wd/hub", options=chrome_options)
             driver.get(video_url)
             time.sleep(5)  # Wait for the page to load
 
